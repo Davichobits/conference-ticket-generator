@@ -1,4 +1,4 @@
 export { Header } from './header';
 export { Hero } from './hero';
-export { UploadInput } from './upload-input/upload-input';
-export { Form } from './form';
+export { Form } from './form/form';
+export { TicketGenerated } from './ticket-generated';

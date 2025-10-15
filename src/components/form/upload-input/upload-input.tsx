@@ -46,15 +46,15 @@ const handleFileDrop = (event: React.DragEvent<HTMLLabelElement>) => {
         htmlFor='dropzone-file'
         onDragOver={handleDragOver}
         onDrop={handleFileDrop}
-        className='flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50 hover:bg-Neutral-500 cursor-pointer mb-3 overflow-hidden'
+        className={`flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50  cursor-pointer mb-3 overflow-hidden ${!previewUrl && 'hover:bg-Neutral-500/50'}`}
       >
         <div className='flex flex-col items-center justify-center pt-5 pb-6'>
           {previewUrl ? (
             <>
               <img src={previewUrl} alt='preview' className='size-[50px] rounded-xl border-2 border-Neutral-500  mb-2' />
               <div className='flex gap-4'>
-                <button className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline'>Remove Image</button>
-                <button className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline'>Change Image</button>
+                <button className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'>Remove Image</button>
+                <button className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'>Change Image</button>
               </div>
             </>
           ) : (

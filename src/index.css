@@ -22,5 +22,5 @@
 }
 
 body {
-  @apply bg-[url(/images/background-mobile.png)] flex justify-center text-Neutral-0 font-Inconsolata overflow-hidden;
+  @apply flex justify-center text-Neutral-0 font-Inconsolata overflow-x-hidden relative -z-20;
 }
