@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: Inconsolata;
+  font-style: normal;
+  font-weight: 400 500 700 800;
+  font-display: swap;
+  src: url("./assets/fonts/Inconsolata-VariableFont_wdth_wght.ttf") format("woff2");
+}
+
+@theme {
+  --color-Neutral-0: hsl(0, 0%, 100%);
+  --color-Neutral-300: hsl(252, 6%, 83%);
+  --color-Neutral-500: hsl(245, 15%, 58%);
+  --color-Neutral-700: hsl(245, 19%, 35%);
+  --color-Neutral-900: hsl(248, 70%, 10%);
+  --color-Orange-500: hsl(7, 88%, 67%);
+  --color-Orange-700: hsl(7, 71%, 60%);
+  --color-Gradient-text: hsl(7, 86%, 67%) to hsl(0, 0%, 100%);
+
+  --font-Inconsolata: Inconsolata;
+}
+
+body {
+  @apply bg-[url(/images/background-mobile.png)] flex justify-center text-Neutral-0 font-Inconsolata overflow-hidden;
+}

@@ -4,8 +4,8 @@ interface Props {
 
 export const Header = ({ styles='' }: Props) => {
   return (
-    <header className={`${styles}`}>
-      <img src="/public/images/logo-full.svg" alt="Logo Coding Conf" />
+    <header className={`${styles} flex justify-center`}>
+      <img src="/images/logo-full.svg" alt="Logo Coding Conf" />
     </header>
   )
 }
