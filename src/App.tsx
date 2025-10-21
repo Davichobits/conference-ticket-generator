@@ -1,15 +1,22 @@
+import { useState } from 'react'
 import { 
   Header, 
   Hero, 
   Form, 
-  // Congrats,
-  // TicketGenerated 
+  Congrats,
+  TicketGenerated 
 } from './components'
 
 function App() {
 
+  const [isShow, setIsShow] = useState<boolean>(false)
+
+  const handleClick = () => {
+    setIsShow(prevState => !prevState)
+  }
+
   return (
-    <main className='w-[375px] px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative'>
+    <main className='px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative'>
 
       <img
           src="/images/pattern-squiggly-line-top.svg"
@@ -20,10 +27,20 @@ function App() {
       <section className='relative mb-[100px]'>
         
         <Header styles='mb-10' />
-        <Hero styles='mb-10' />
-        <Form />
-        {/* <Congrats />
-        <TicketGenerated /> */}
+        
+
+        {
+          isShow 
+          ? ( <>
+                <Congrats />
+                <TicketGenerated /> 
+              </>)
+            : (
+              <>
+                <Hero styles='mb-10' />
+                <Form setIsShow={handleClick} />
+              </>
+            )}
       </section>
 
       <img 

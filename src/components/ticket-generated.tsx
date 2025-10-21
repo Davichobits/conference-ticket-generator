@@ -4,7 +4,7 @@ interface Props {
 
 export const TicketGenerated = ({ styles='' }: Props) => {
   return (
-    <div className={`${styles} bg-[url(images/pattern-ticket.svg)] bg-contain h-[160px] p-4 relative`}>
+    <div className={`${styles} bg-[url(images/pattern-ticket.svg)] bg-no-repeat bg-contain w-[342px] h-[160px] m-auto p-4 relative md:w-[600px] md:h-[280px]`}>
 
       <img src="/images/logo-full.svg" alt="logo full" />
       <p className='text-sm text-Neutral-500 ml-12 mb-8'>Jan 31, 2025 / Austing, TX</p>
@@ -24,7 +24,7 @@ export const TicketGenerated = ({ styles='' }: Props) => {
         </div>
       </div>
 
-        <p className='text-2xl absolute rotate-90 top-15 right-0 text-Neutral-500'>#01609</p>
+      <p className='text-2xl absolute rotate-90 top-15 right-0 text-Neutral-500'>#01609</p>
 
     </div>
   )
