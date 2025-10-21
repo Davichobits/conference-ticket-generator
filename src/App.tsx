@@ -21,7 +21,7 @@ function App() {
       <img
           src="/images/pattern-squiggly-line-top.svg"
           alt="pattern squiggly line top"
-          className='absolute top-0 h-[52px] right-0'
+          className='absolute top-4 h-[52px] right-0'
         />
 
       <section className='relative'>
@@ -48,6 +48,13 @@ function App() {
         src="/images/pattern-lines.svg" 
         className='absolute inset-0 mx-auto min-w-5xl -z-0'
       />
+
+      <img
+          src="/images/pattern-squiggly-line-bottom-mobile-tablet.svg"
+          alt="pattern squiggly line top"
+          className='absolute bottom-0 h-[200px] left-0'
+        />
+
     </main>
   )
 }
