@@ -9,7 +9,7 @@ interface Props {
 
 export const Form = ({ styles='', setIsShow }: Props) => {
   return (
-    <form className={`${styles}`}>
+    <form className={`${styles} relative z-10`}>
       <UploadInput />
       <div className='flex flex-col gap-6 my-6'>
         <Input
