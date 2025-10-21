@@ -55,7 +55,7 @@ export const UploadInput = () => {
     <>
       <div
         {...getRootProps()}
-        className={`flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50  cursor-pointer mb-3 overflow-hidden ${!file && 'hover:bg-Neutral-500/50'}`}
+        className={`flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50  cursor-pointer mb-3 overflow-hidden ${!file && 'hover:bg-Neutral-500/50'} mb-6`}
       >
         <div className='flex flex-col items-center justify-center pt-5 pb-6'>
           {file ? (
