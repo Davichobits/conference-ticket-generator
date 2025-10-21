@@ -9,8 +9,8 @@ interface Props {
 export const Form = ({ styles='' }: Props) => {
   return (
     <form className={`${styles}`}>
-      <UploadInput styles='mb-6' />
-      <div className='flex flex-col gap-6 mb-6'>
+      <UploadInput />
+      <div className='flex flex-col gap-6 my-6'>
         <Input
           label='Full Name'
           placeholder='Jonathan Kirstof'
