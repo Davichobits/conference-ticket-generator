@@ -16,12 +16,12 @@ function App() {
   }
 
   return (
-    <main className='px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative min-h-screen md:bg-[url(/images/background-tablet.png)] pb-[100px] overflow-hidden md:px-8 md:py-10'>
+    <main className='px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative min-h-screen md:bg-[url(/images/background-tablet.png)] pb-[80px] overflow-hidden md:px-8 md:pt-10'>
 
       <img
           src="/images/pattern-squiggly-line-top.svg"
           alt="pattern squiggly line top"
-          className='absolute top-4 h-[52px] right-0'
+          className='absolute top-4 h-[52px] right-0 md:h-[100px] md:top-12'
         />
 
       <section className='relative'>
