@@ -4,11 +4,12 @@ import { Button } from './button';
 
 interface Props {
   styles?: string;
+  setIsShow: ()=>void;
 }
 
-export const Form = ({ styles='' }: Props) => {
+export const Form = ({ styles='', setIsShow }: Props) => {
   return (
-    <form className={`${styles}`}>
+    <form className={`${styles} relative z-10`}>
       <UploadInput />
       <div className='flex flex-col gap-6 my-6'>
         <Input
@@ -24,7 +25,7 @@ export const Form = ({ styles='' }: Props) => {
           placeholder='@jonatankristof0101'
         />
       </div>
-      <Button />
+      <Button handleClick={setIsShow}  />
     </form>
   )
 }
