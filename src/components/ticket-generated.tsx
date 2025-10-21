@@ -4,19 +4,19 @@ interface Props {
 
 export const TicketGenerated = ({ styles='' }: Props) => {
   return (
-    <div className={`${styles} bg-[url(images/pattern-ticket.svg)] bg-contain h-[160px] p-6 relative`}>
+    <div className={`${styles} bg-[url(images/pattern-ticket.svg)] bg-contain h-[160px] p-4 relative`}>
 
-      <img src="/public/images/logo-full.svg" alt="logo full" />
-      <p>Jan 31, 2025 / Austing, TX</p>
+      <img src="/images/logo-full.svg" alt="logo full" />
+      <p className='text-sm text-Neutral-500 ml-12 mb-8'>Jan 31, 2025 / Austing, TX</p>
 
-      <div className='flex'>
+      <div className='flex gap-3'>
         <img 
           alt="imageavatar"
-          src="/public/images/image-avatar.jpg"
-          className='w-14'
+          src="/images/image-avatar.jpg"
+          className='size-[45px] rounded-lg'
         />
         <div>
-          <p>Jontan Kristof</p>
+          <p className='text-xl font-medium'>Jontan Kristof</p>
           <p className='flex'>
             <img src="/images/icon-github.svg" alt="" />
             <span>@jonatankristof0101</span>

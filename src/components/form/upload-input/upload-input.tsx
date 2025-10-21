@@ -1,60 +1,69 @@
-import { useEffect, useState } from 'react';
+import { 
+  useCallback,
+  useState 
+} from 'react';
 import { ImageFormats } from './image-formats';
 import { UploadIcon } from './upload-icon';
+import {useDropzone} from 'react-dropzone'
 
-interface Props {
-  styles?: string;
+interface CustomFile extends File {
+  preview: string;
 }
 
-export const UploadInput = ({ styles = '' }: Props) => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+export const UploadInput = () => {
+  const [file, setFile] = useState<CustomFile | null>(null);
 
-  useEffect(() => {
-    return () => {
-      // cleanup on unmount
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-    };
-  }, [previewUrl]);
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    if(acceptedFiles?.length) {
+      // Solo tomamos el primer archivo
+      const newFile = acceptedFiles[0];
+      // Limpiar el preview anterior si existe
+      if (file) {
+        URL.revokeObjectURL(file.preview);
+      }
+      setFile(Object.assign(newFile, {
+        preview: URL.createObjectURL(newFile)
+      }) as CustomFile);
+    }
+  }, [file])
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    if (!file) return;
+  const {
+    getRootProps, 
+    getInputProps, 
+    // isDragActive, 
+    open, 
+    // fileRejections
+  } = useDropzone({
+    onDrop,
+    accept: {
+      'image/jpg': [],
+      'image/png': [],
+    }
+  })
 
-    // revoke previous preview if any
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
+  const handleRemoveImage = () => {
+    setFile(null)
+  }
 
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+  const handleChangeImage = () => {
+    open();
   };
 
-  const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
-  event.preventDefault();
-};
-
-const handleFileDrop = (event: React.DragEvent<HTMLLabelElement>) => {
-  event.preventDefault();
-  if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-    const file = event.dataTransfer.files[0];
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
-  }
-};
+  // console.log(fileRejections[0].errors[0].message)
 
   return (
-    <div className={`${styles}`}>
-      <label
-        htmlFor='dropzone-file'
-        onDragOver={handleDragOver}
-        onDrop={handleFileDrop}
-        className={`flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50  cursor-pointer mb-3 overflow-hidden ${!previewUrl && 'hover:bg-Neutral-500/50'}`}
+    <>
+      <div
+        {...getRootProps()}
+        className={`flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50  cursor-pointer mb-3 overflow-hidden ${!file && 'hover:bg-Neutral-500/50'}`}
       >
         <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-          {previewUrl ? (
+          {file ? (
             <>
-              <img src={previewUrl} alt='preview' className='size-[50px] rounded-xl border-2 border-Neutral-500  mb-2' />
+              <img src={file.preview} alt='preview' className='size-[50px] rounded-xl border-2 border-Neutral-500  mb-2' />
               <div className='flex gap-4'>
-                <button className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'>Remove Image</button>
-                <button className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'>Change Image</button>
+                <button onClick={handleRemoveImage} className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'>Remove Image</button>
+                <button onClick={handleChangeImage} className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'>Change Image</button>
               </div>
             </>
           ) : (
@@ -66,9 +75,11 @@ const handleFileDrop = (event: React.DragEvent<HTMLLabelElement>) => {
             </>
           )}
         </div>
-        <input id='dropzone-file' type='file' accept='image/*' className='hidden' onChange={handleFileChange} />
-      </label>
+        <input id='dropzone-file' type='file' className='hidden' {...getInputProps()} />
+      </div>
+
       <ImageFormats />
-    </div>
+
+    </>
   );
 };

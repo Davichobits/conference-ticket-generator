@@ -1,8 +1,9 @@
 import { 
   Header, 
   Hero, 
-  // Form, 
-  TicketGenerated 
+  Form, 
+  // Congrats,
+  // TicketGenerated 
 } from './components'
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <main className='w-[375px] px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative'>
 
       <img
-          src="/public/images/pattern-squiggly-line-top.svg"
+          src="/images/pattern-squiggly-line-top.svg"
           alt="pattern squiggly line top"
           className='absolute top-0 h-[52px] right-0'
         />
@@ -20,8 +21,9 @@ function App() {
         
         <Header styles='mb-10' />
         <Hero styles='mb-10' />
-        {/* <Form /> */}
-        <TicketGenerated />
+        <Form />
+        {/* <Congrats />
+        <TicketGenerated /> */}
       </section>
 
       <img 
