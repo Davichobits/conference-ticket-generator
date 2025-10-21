@@ -27,7 +27,7 @@ export const TicketGenerated = ({ styles='' }: Props) => {
         </div>
       </div>
 
-      <p className='text-2xl absolute rotate-90 top-15 right-0 text-Neutral-500'>#01609</p>
+      <p className='text-2xl absolute top-1/2 right-0 transform -translate-y-1/2 rotate-90 text-Neutral-500 md:right-4 md:text-3xl'>#01609</p>
 
     </div>
   )
