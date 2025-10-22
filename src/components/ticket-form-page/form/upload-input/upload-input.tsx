@@ -10,7 +10,11 @@ interface CustomFile extends File {
   preview: string;
 }
 
-export const UploadInput = () => {
+interface Props {
+  onFileChange?: (f: File | null) => void;
+}
+
+export const UploadInput = ({ onFileChange }: Props) => {
   const [file, setFile] = useState<CustomFile | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -21,35 +25,31 @@ export const UploadInput = () => {
       if (file) {
         URL.revokeObjectURL(file.preview);
       }
-      setFile(Object.assign(newFile, {
+      const assigned = Object.assign(newFile, {
         preview: URL.createObjectURL(newFile)
-      }) as CustomFile);
+      }) as CustomFile;
+      setFile(assigned);
+      if(onFileChange) onFileChange(assigned);
     }
-  }, [file])
+  }, [file, onFileChange])
 
   const {
     getRootProps, 
     getInputProps, 
-    // isDragActive, 
     open, 
-    // fileRejections
-  } = useDropzone({
-    onDrop,
-    accept: {
-      'image/jpg': [],
-      'image/png': [],
-    }
-  })
+  } = useDropzone({onDrop})
 
   const handleRemoveImage = () => {
+    if (file) {
+      URL.revokeObjectURL(file.preview);
+    }
     setFile(null)
+    if(onFileChange) onFileChange(null);
   }
 
   const handleChangeImage = () => {
     open();
   };
-
-  // console.log(fileRejections[0].errors[0].message)
 
   return (
     <>
@@ -75,7 +75,7 @@ export const UploadInput = () => {
             </>
           )}
         </div>
-        <input id='dropzone-file' type='file' className='hidden' {...getInputProps()} />
+  <input id='dropzone-file' type='file' className='hidden' {...getInputProps()} />
       </div>
 
       <ImageFormats />

@@ -6,24 +6,28 @@ import { Button } from './button';
 
 interface Props {
   styles?: string;
+  setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type Inputs = {
   fullName: string;
   email: string;
   githubProfile: string;
+  file: File | null;
 };
 
-export const Form = ({ styles = '' }: Props) => {
+export const Form = ({ styles = '', setIsShow }: Props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const sendForm: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log('ERRORS', errors);
+  const sendForm: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+    setIsShow((prevState) => !prevState)
+  };
 
   const getErrorEmailMessage = () : string => {
     if(errors.email?.type === 'required'){
@@ -38,7 +42,9 @@ export const Form = ({ styles = '' }: Props) => {
       onSubmit={handleSubmit(sendForm)}
       className={`${styles} relative z-10`}
     >
-      <UploadInput />
+      <UploadInput
+        onFileChange={(f: File | null) => setValue('file', f)}
+      />
       <div className='flex flex-col gap-6 my-6'>
         <Input
           {...register('fullName', {
