@@ -1,5 +1,3 @@
-export { Header } from './header';
-export { Hero } from './hero';
-export { Form } from './form/form';
-export { TicketGenerated } from './ticket-generated';
-export { Congrats } from './congrats';
+export { MainLayout } from './main-layout/main-layout';
+export { TicketFormPage } from './ticket-form-page/ticket-form-page';
+export { ConfirmationPage } from './confirmation-page/confirmation-page';
