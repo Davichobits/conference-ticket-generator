@@ -16,12 +16,13 @@ function App() {
   }
 
   return (
-    <main className='px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative min-h-screen md:bg-[url(/images/background-tablet.png)] pb-[80px] overflow-hidden md:px-8 md:pt-10 lg:bg-[url(/images/background-desktop.png)]'>
+    <main className='px-4 py-8 w-full 
+    bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative min-h-screen md:bg-[url(/images/background-tablet.png)] pb-[80px] overflow-hidden md:px-8 md:pt-10 lg:bg-[url(/images/background-desktop.png)]'>
 
       <img
           src="/images/pattern-squiggly-line-top.svg"
           alt="pattern squiggly line top"
-          className='absolute top-4 h-[52px] right-0 md:h-[100px] md:top-12'
+          className='absolute top-4 h-[52px] right-0 md:h-[100px] md:top-12 lg:h-[200px]'
         />
 
       <section className='relative'>
@@ -52,7 +53,7 @@ function App() {
       <img
           src="/images/pattern-squiggly-line-bottom-mobile-tablet.svg"
           alt="pattern squiggly line top"
-          className='absolute bottom-0 h-[200px] left-0'
+          className='absolute bottom-0 h-[200px] left-0 lg:h-[400px]'
         />
 
     </main>
