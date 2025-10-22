@@ -16,7 +16,7 @@ function App() {
   }
 
   return (
-    <main className='px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative min-h-screen md:bg-[url(/images/background-tablet.png)] pb-[80px] overflow-hidden md:px-8 md:pt-10'>
+    <main className='px-4 py-8 bg-[url(/images/background-mobile.png)] bg-bottom bg-cover relative min-h-screen md:bg-[url(/images/background-tablet.png)] pb-[80px] overflow-hidden md:px-8 md:pt-10 lg:bg-[url(/images/background-desktop.png)]'>
 
       <img
           src="/images/pattern-squiggly-line-top.svg"
