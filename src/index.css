@@ -21,6 +21,10 @@
   --font-Inconsolata: Inconsolata;
 }
 
+#root {
+  @apply w-full;
+}
+
 body {
-  @apply flex justify-center text-Neutral-0 font-Inconsolata overflow-x-hidden relative -z-20;
+  @apply flex justify-center text-Neutral-0 font-Inconsolata overflow-x-hidden relative -z-20 w-full;
 }
