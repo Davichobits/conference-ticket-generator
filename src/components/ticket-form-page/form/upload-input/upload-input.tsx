@@ -1,101 +1,40 @@
-import { useCallback, useState } from 'react';
-import { ImageFormats } from './image-formats';
-import { UploadIcon } from './upload-icon';
-import { useDropzone } from 'react-dropzone';
+import { 
+  useState, 
+  type ChangeEvent 
+} from 'react';
 
-interface CustomFile extends File {
-  preview: string;
-}
+export const UploadInput = ({...rest}) => {
 
-interface Props {
-  onFileChange?: (f: File | null) => void;
-}
+  const [preview, setPreview] = useState<string | undefined>()
 
-export const UploadInput = ({ onFileChange }: Props) => {
-  const [file, setFile] = useState<CustomFile | null>(null);
-
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      if (acceptedFiles?.length) {
-        // Solo tomamos el primer archivo
-        const newFile = acceptedFiles[0];
-        // Limpiar el preview anterior si existe
-        if (file) {
-          URL.revokeObjectURL(file.preview);
-        }
-        const assigned = Object.assign(newFile, {
-          preview: URL.createObjectURL(newFile),
-        }) as CustomFile;
-        setFile(assigned);
-        if (onFileChange) onFileChange(assigned);
-      }
-    },
-    [file, onFileChange]
-  );
-
-  const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
-
-  const handleRemoveImage = () => {
-    if (file) {
-      URL.revokeObjectURL(file.preview);
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if(file){
+      const objectUrl = URL.createObjectURL(file);
+      setPreview(objectUrl)
     }
-    setFile(null);
-    if (onFileChange) onFileChange(null);
-  };
 
-  const handleChangeImage = () => {
-    open();
-  };
+  }
 
   return (
-    <>
-      <div
-        {...getRootProps()}
-        className={`flex flex-col items-center justify-center w-full px-4 py-3 border-3 border-Neutral-0 border-dashed rounded-xl bg-Neutral-900/50  cursor-pointer mb-3 overflow-hidden ${
-          !file && 'hover:bg-Neutral-500/50'
-        } mb-6`}
-      >
-        <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-          {file ? (
-            <>
-              <img
-                src={file.preview}
-                alt='preview'
-                className='size-[50px] rounded-xl border-2 border-Neutral-500  mb-2'
-              />
-              <div className='flex gap-4'>
-                <button
-                  onClick={handleRemoveImage}
-                  className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'
-                >
-                  Remove Image
-                </button>
-                <button
-                  onClick={handleChangeImage}
-                  className='bg-Neutral-700/50 px-3 py-1 rounded-lg cursor-pointer hover:underline underline-offset-2'
-                >
-                  Change Image
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <UploadIcon />
-              <p className='mb-2 text-sm text-gray-500 dark:text-gray-400'>
-                Drag and drop or click to upload
-              </p>
-            </>
-          )}
+    <div className='mb-4'>
+      <p className='mb-4 text-xl'>Upload Avatar</p>
+      <label className='border-3 border-dashed px-4 py-3 block w-full border-Neutral-0 bg-Neutral-700/50 hover:bg-Neutral-700 rounded-xl cursor-pointer mb-2'>
+        <div className='bg-Neutral-700 size-[50px] grid place-content-center rounded-xl border-2 border-Neutral-500 mb-2 mx-auto'>
+          <img src={preview ? preview : '/images/icon-upload.svg'} alt="icon upload" />
         </div>
         <input
-          id='dropzone-file'
-          type='file'
+          {...rest}
+          onChange={handleFileChange}
           className='hidden'
-          {...getInputProps()}
+          type="file"
         />
+        <span className='text-center block text-gray-500 text-sm'>Drag and drop or click to upload</span>
+      </label>
+      <div className='flex gap-2'>
+        <img src="/images/icon-info.svg" alt="icon info" />
+        <p>SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
       </div>
-
-      <ImageFormats />
-    </>
-  );
-};
+    </div>
+  )
+}

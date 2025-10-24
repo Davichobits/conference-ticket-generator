@@ -20,9 +20,11 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
   const {
     register,
     handleSubmit,
-    setValue,
+    getValues,
     formState: { errors },
   } = useForm<Inputs>();
+
+  console.log(getValues())
 
   const sendForm: SubmitHandler<Inputs> = (data) => {
     console.log(data)
@@ -43,7 +45,7 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
       className={`${styles} relative z-10`}
     >
       <UploadInput
-        onFileChange={(f: File | null) => setValue('file', f)}
+        {...register('file')}
       />
       <div className='flex flex-col gap-6 my-6'>
         <Input
