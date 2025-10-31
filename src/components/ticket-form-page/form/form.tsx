@@ -45,6 +45,7 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
       className={`${styles} relative z-10`}
     >
       <UploadInput
+      url=''
         {...register('file')}
       />
       <div className='flex flex-col gap-6 my-6'>

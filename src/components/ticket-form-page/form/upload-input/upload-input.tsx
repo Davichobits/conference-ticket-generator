@@ -1,31 +1,22 @@
-import { 
-  useState, 
-  type ChangeEvent 
-} from 'react';
+interface Props {
+  url?: string;
+}
 
-export const UploadInput = ({...rest}) => {
-
-  const [preview, setPreview] = useState<string | undefined>()
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if(file){
-      const objectUrl = URL.createObjectURL(file);
-      setPreview(objectUrl)
-    }
-
-  }
+export const UploadInput = ({
+  url='',
+  ...rest
+}: Props) => {
 
   return (
     <div className='mb-4'>
       <p className='mb-4 text-xl'>Upload Avatar</p>
       <label className='border-3 border-dashed px-4 py-3 block w-full border-Neutral-0 bg-Neutral-700/50 hover:bg-Neutral-700 rounded-xl cursor-pointer mb-2'>
         <div className='bg-Neutral-700 size-[50px] grid place-content-center rounded-xl border-2 border-Neutral-500 mb-2 mx-auto'>
-          <img src={preview ? preview : '/images/icon-upload.svg'} alt="icon upload" />
+          <img src={url ? url : '/images/icon-upload.svg'} alt="icon upload" />
         </div>
         <input
           {...rest}
-          onChange={handleFileChange}
+          // onChange={handleFileChange}
           className='hidden'
           type="file"
         />
