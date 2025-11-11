@@ -1,8 +1,13 @@
+// React
+import { useState } from 'react';
+// RHF
 import { useForm, type SubmitHandler } from 'react-hook-form';
 // components
 import { UploadInput } from './upload-input/upload-input';
 import { Input } from './input';
 import { Button } from './button';
+// store
+import { useUserStore } from '../../../store/user-store';
 
 interface Props {
   styles?: string;
@@ -13,21 +18,34 @@ type Inputs = {
   fullName: string;
   email: string;
   githubProfile: string;
-  file: File | null;
 };
 
 export const Form = ({ styles = '', setIsShow }: Props) => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<Inputs>();
 
-  console.log(getValues())
+  const userStore = useUserStore()
 
+  const [imageUrl, setImageUrl] = useState<string>('');
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    }
+  };
+  
   const sendForm: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
+    userStore.setUser({
+      email: data.email,
+      fullName: data.fullName,
+      githubUser: data.githubProfile,
+      url: imageUrl
+    })
     setIsShow((prevState) => !prevState)
   };
 
@@ -45,8 +63,8 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
       className={`${styles} relative z-10`}
     >
       <UploadInput
-      url=''
-        {...register('file')}
+        url={imageUrl}
+        onChange={handleFileChange}
       />
       <div className='flex flex-col gap-6 my-6'>
         <Input

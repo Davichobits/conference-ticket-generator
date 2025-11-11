@@ -1,9 +1,11 @@
 interface Props {
   url?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const UploadInput = ({
   url='',
+  onChange,
   ...rest
 }: Props) => {
 
@@ -16,7 +18,7 @@ export const UploadInput = ({
         </div>
         <input
           {...rest}
-          // onChange={handleFileChange}
+          onChange={onChange}
           className='hidden'
           type="file"
         />
