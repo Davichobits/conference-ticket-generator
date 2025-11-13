@@ -1,10 +1,16 @@
+import { InfoIcon } from '../../../info-icon';
+
 interface Props {
   url?: string;
+  isError: boolean;
+  errorMessage?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const UploadInput = ({
   url='',
+  isError,
+  errorMessage = '',
   onChange,
   ...rest
 }: Props) => {
@@ -24,10 +30,18 @@ export const UploadInput = ({
         />
         <span className='text-center block text-gray-500 text-sm'>Drag and drop or click to upload</span>
       </label>
-      <div className='flex gap-2'>
-        <img src="/images/icon-info.svg" alt="icon info" />
-        <p>SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-      </div>
+        {
+          isError ? 
+            <p className='flex items-center gap-1 text-Orange-700'>
+              <InfoIcon />
+              <span>{errorMessage}</span>
+            </p>
+          :
+            <div className='flex gap-2'>
+              <InfoIcon />
+              <p>SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+        }
     </div>
   )
 }

@@ -30,10 +30,14 @@ export const Input = ({
         placeholder={placeholder}
         className='border border-Neutral-300 rounded-xl h-[54px] px-4 bg-Neutral-700/50'
       />
-      {isError && <p className='flex items-center gap-1 text-Orange-700'>
-        <InfoIcon />
-        <span>{errorMessage}</span>
-        </p>}
+      {
+        isError && (
+          <p className='flex items-center gap-1 text-Orange-700'>
+            <InfoIcon />
+            <span>{errorMessage}</span>
+          </p>
+        )
+      }
     </div>
   );
 };

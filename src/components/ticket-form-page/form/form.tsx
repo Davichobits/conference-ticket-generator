@@ -31,16 +31,15 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
 
   const userStore = useUserStore();
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [imageUrl, setImageUrl] = useState<string>('')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>('');
 
   const sendForm: SubmitHandler<Inputs> = (data) => {
-    
-    console.log("📦 Archivo desde RHF:", data.file[0])
-    console.log("🧠 Archivo desde useState:", selectedFile)
+    console.log('📦 Archivo desde RHF:', data.file[0]);
+    console.log('🧠 Archivo desde useState:', selectedFile);
 
-    const file = data.file[0]
-    let url = ''
+    const file = data.file[0];
+    let url = '';
 
     if (file) {
       url = URL.createObjectURL(file);
@@ -69,20 +68,22 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
       className={`${styles} relative z-10`}
     >
       <Controller
-        name="file"
-        rules={{ required: "La imagen es obligatoria" }} // 👈 regla de validación
+        name='file'
+        rules={{ required: 'La imagen es obligatoria' }} // 👈 regla de validación
         control={control}
         render={({ field }) => (
           <UploadInput
-          url={imageUrl}
-          onChange={(e) => {
-              const file = e.target.files?.[0]
+            url={imageUrl}
+            isError={errors.file?.type === 'required'}
+            errorMessage={errors.file?.message}
+            onChange={(e) => {
+              const file = e.target.files?.[0];
               if (file) {
                 const url = URL.createObjectURL(file);
                 setImageUrl(url);
               }
-              setSelectedFile(file || null)  // ✅ guarda en estado local
-              field.onChange(e.target.files) // ✅ notifica a RHF
+              setSelectedFile(file || null); // ✅ guarda en estado local
+              field.onChange(e.target.files); // ✅ notifica a RHF
             }}
           />
         )}
