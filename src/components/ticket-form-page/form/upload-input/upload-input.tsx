@@ -19,7 +19,7 @@ export const UploadInput = ({
     <div className='mb-4'>
       <p className='mb-4 text-xl'>Upload Avatar</p>
       <label className='border-3 border-dashed px-4 py-3 block w-full border-Neutral-0 bg-Neutral-700/50 hover:bg-Neutral-700 rounded-xl cursor-pointer mb-1'>
-        <div className='bg-Neutral-700 size-[50px] grid place-content-center rounded-xl border-2 border-Neutral-500 mb-2 mx-auto'>
+        <div className='bg-Neutral-700 size-[50px] grid place-content-center rounded-xl border-2 border-Neutral-500 mb-2 mx-auto overflow-hidden'>
           <img src={url ? url : '/images/icon-upload.svg'} alt="icon upload" />
         </div>
         <input
