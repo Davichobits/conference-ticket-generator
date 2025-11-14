@@ -69,7 +69,7 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
     >
       <Controller
         name='file'
-        rules={{ required: 'La imagen es obligatoria' }} // 👈 regla de validación
+        rules={{ required: 'The image is required' }}
         control={control}
         render={({ field }) => (
           <UploadInput
@@ -82,8 +82,8 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
                 const url = URL.createObjectURL(file);
                 setImageUrl(url);
               }
-              setSelectedFile(file || null); // ✅ guarda en estado local
-              field.onChange(e.target.files); // ✅ notifica a RHF
+              setSelectedFile(file || null);
+              field.onChange(e.target.files);
             }}
           />
         )}
