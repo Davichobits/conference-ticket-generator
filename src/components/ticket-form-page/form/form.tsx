@@ -30,13 +30,9 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
   } = useForm<Inputs>();
 
   const userStore = useUserStore();
-
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>('');
 
   const sendForm: SubmitHandler<Inputs> = (data) => {
-    console.log('📦 Archivo desde RHF:', data.file[0]);
-    console.log('🧠 Archivo desde useState:', selectedFile);
 
     const file = data.file[0];
     let url = '';
@@ -82,7 +78,6 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
                 const url = URL.createObjectURL(file);
                 setImageUrl(url);
               }
-              setSelectedFile(file || null);
               field.onChange(e.target.files);
             }}
           />
