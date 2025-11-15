@@ -9,7 +9,7 @@ export const TicketGenerated = ({ styles = '' }: Props) => {
   const {fullName, githubUser, url} = useUserStore()
 
   return (
-    <div className={`${styles} bg-[url(images/pattern-ticket.svg)] bg-no-repeat bg-contain w-[342px] h-[160px] m-auto p-4 relative md:w-[600px] md:h-[280px] md:py-[30px] md:px-6`}>
+    <div className={`${styles} bg-[url(/images/pattern-ticket.svg)] bg-no-repeat bg-contain w-[342px] h-[160px] m-auto p-4 relative md:w-[600px] md:h-[280px] md:py-[30px] md:px-6`}>
 
       <div className='flex flex-col justify-between h-full'>
         <div>
