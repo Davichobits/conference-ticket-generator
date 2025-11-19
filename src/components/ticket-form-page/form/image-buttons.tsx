@@ -6,18 +6,31 @@ interface Props {
 
 export const ImageButtons = ({setImageUrl}: Props) => {
 
-  const removeImage = () => {
+  const removeImage = (e: React.MouseEvent<HTMLButtonElement> ) => {
+    e.preventDefault(); 
     setImageUrl('')
   }
 
   const changeImage = () => {
-    console.log('change')
+    setImageUrl('')
   }
 
   return (
     <div className='flex justify-center gap-4'>
-      <button className='bg-Neutral-300/10 px-2 rounded-lg cursor-pointer hover:bg-Neutral-300/15' onClick={removeImage}>Remove Image</button>
-      <button className='bg-Neutral-300/10 px-2 rounded-lg cursor-pointer hover:bg-Neutral-300/15' onClick={changeImage}>Change Image</button>
+      <button 
+        type='button'
+        onClick={removeImage}
+        className='bg-Neutral-300/10 px-2 rounded-lg cursor-pointer hover:bg-Neutral-300/15' 
+        >
+          Remove Image
+        </button>
+      <button
+        type='button'
+        onClick={changeImage}
+        className='bg-Neutral-300/10 px-2 rounded-lg cursor-pointer hover:bg-Neutral-300/15'
+      >
+        Change Image
+      </button>
     </div>
   )
 }
