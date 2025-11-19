@@ -70,6 +70,7 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
         render={({ field }) => (
           <UploadInput
             url={imageUrl}
+            setImageUrl={setImageUrl}
             isError={errors.file?.type === 'required'}
             errorMessage={errors.file?.message}
             onChange={(e) => {

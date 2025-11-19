@@ -1,8 +1,11 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { InfoIcon } from '../../../info-icon';
+import { ImageButtons } from '../image-buttons';
 
 interface Props {
   url?: string;
   isError: boolean;
+  setImageUrl: Dispatch<SetStateAction<string>>
   errorMessage?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -11,14 +14,17 @@ export const UploadInput = ({
   url='',
   isError,
   errorMessage = '',
+  setImageUrl,
   onChange,
   ...rest
 }: Props) => {
 
+  const isImage = url !== '';
+
   return (
     <div className='mb-4'>
       <p className='mb-4 text-xl'>Upload Avatar</p>
-      <label className='border-3 border-dashed px-4 py-3 block w-full border-Neutral-0 bg-Neutral-700/50 hover:bg-Neutral-700 rounded-xl cursor-pointer mb-1'>
+      <label className={`border-3 border-dashed px-4 py-3 block w-full border-Neutral-0 bg-Neutral-700/50  rounded-xl mb-1 ${isImage ? '' : 'hover:bg-Neutral-700 cursor-pointer '}`}>
         <div className='bg-Neutral-700 size-[50px] grid place-content-center rounded-xl border-2 border-Neutral-500 mb-2 mx-auto overflow-hidden'>
           <img src={url ? url : '/images/icon-upload.svg'} alt="icon upload" />
         </div>
@@ -28,7 +34,9 @@ export const UploadInput = ({
           className='hidden'
           type="file"
         />
-        <span className='text-center block text-gray-500 text-sm'>Drag and drop or click to upload</span>
+        {
+          isImage ? (<ImageButtons setImageUrl={setImageUrl}/>) : (<span className='text-center block text-gray-500 text-sm'>Drag and drop or click to upload</span>)
+        }
       </label>
         {
           isError ? 
