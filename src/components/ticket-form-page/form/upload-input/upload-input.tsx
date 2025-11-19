@@ -1,9 +1,11 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { InfoIcon } from '../../../info-icon';
 import { ImageButtons } from '../image-buttons';
 
 interface Props {
   url?: string;
   isError: boolean;
+  setImageUrl: Dispatch<SetStateAction<string>>
   errorMessage?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -12,6 +14,7 @@ export const UploadInput = ({
   url='',
   isError,
   errorMessage = '',
+  setImageUrl,
   onChange,
   ...rest
 }: Props) => {
@@ -32,7 +35,7 @@ export const UploadInput = ({
           type="file"
         />
         {
-          isImage ? (<ImageButtons/>) : (<span className='text-center block text-gray-500 text-sm'>Drag and drop or click to upload</span>)
+          isImage ? (<ImageButtons setImageUrl={setImageUrl}/>) : (<span className='text-center block text-gray-500 text-sm'>Drag and drop or click to upload</span>)
         }
       </label>
         {
