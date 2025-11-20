@@ -1,21 +1,11 @@
-import { useState } from 'react';
-import { TicketFormPage, ConfirmationPage, MainLayout } from './components';
+import { ShowTicketProvider } from './contexts/show-ticket-provider';
+import { MainPage } from './components/main-page';
 
 function App() {
-  const [isShow, setIsShow] = useState<boolean>(false);
-
-  const handleClick = () => {
-    setIsShow((prevState) => !prevState);
-  };
-
   return (
-    <MainLayout>
-      {
-        isShow 
-        ? (<ConfirmationPage />) 
-        : (<TicketFormPage handleClick={handleClick} />)
-      }
-    </MainLayout>
+    <ShowTicketProvider>
+      <MainPage />
+    </ShowTicketProvider>
   );
 }
 

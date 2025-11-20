@@ -8,10 +8,11 @@ import { Input } from './input';
 import { Button } from './button';
 // store
 import { useUserStore } from '../../../store/user-store';
+// hooks
+import { useShowTicket } from '../../../hooks/show-ticket';
 
 interface Props {
   styles?: string;
-  setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type Inputs = {
@@ -21,7 +22,7 @@ type Inputs = {
   githubProfile: string;
 };
 
-export const Form = ({ styles = '', setIsShow }: Props) => {
+export const Form = ({ styles = '' }: Props) => {
   const {
     register,
     handleSubmit,
@@ -31,7 +32,8 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
 
   const userStore = useUserStore();
   const [imageUrl, setImageUrl] = useState<string>('');
-
+  const { setShowTicket } = useShowTicket();
+  
   const sendForm: SubmitHandler<Inputs> = (data) => {
 
     const file = data.file[0];
@@ -47,7 +49,7 @@ export const Form = ({ styles = '', setIsShow }: Props) => {
       githubUser: data.githubProfile,
       url,
     });
-    setIsShow((prevState) => !prevState);
+    setShowTicket(true);
   };
 
   const getErrorEmailMessage = (): string => {
